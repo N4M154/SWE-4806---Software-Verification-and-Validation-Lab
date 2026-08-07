@@ -98,6 +98,17 @@ describe("Integration Tests", () => {
     divideSpy.mockRestore();
     powSpy.mockRestore();
   });
+
+  test("Stub that replaces the Basic Calculator module during testing", () => {
+    const multiplyStub = jest.spyOn(basic, "multiply").mockReturnValue(999);
+
+    const result = custom.compoundInterest(1000, 10, 2);
+
+    expect(multiplyStub).toHaveBeenCalled();
+    expect(result.amount).toBe(999);
+
+    multiplyStub.mockRestore();
+  });
 });
 
 // -_- N4M154 -_-
